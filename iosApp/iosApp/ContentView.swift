@@ -11,21 +11,10 @@ struct ComposeView: UIViewControllerRepresentable {
 }
 
 struct ContentView: View {
-    init() {
-        UINavigationBar.appearance().barTintColor = UIColor.systemPurple
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-
-        if #available(iOS 15.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.systemPurple
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
-    }
     var body: some View {
         ComposeView()
-                .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+            .ignoresSafeArea(edges: .all)
+            .ignoresSafeArea(.keyboard)
     }
 }
 

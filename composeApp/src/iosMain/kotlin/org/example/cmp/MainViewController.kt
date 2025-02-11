@@ -1,10 +1,14 @@
 package org.example.cmp
 
+import AppTheme
 import androidx.compose.ui.window.ComposeUIViewController
 import di.initKoin
-import di.initKoinIOS
-import navigation.App
+import navigation.MultiApp
 
 fun MainViewController() = ComposeUIViewController(
     configure = { initKoin() }
-) { App() }
+) {
+    AppTheme {
+        MultiApp()
+    }
+}

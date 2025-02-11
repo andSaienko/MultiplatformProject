@@ -1,13 +1,16 @@
 package org.example.cmp
 
+import AppTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
-import navigation.App
+import navigation.MultiApp
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -23,8 +26,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
+        enableEdgeToEdge()
         setContent {
-            App()
+            AppTheme {
+                MultiApp()
+            }
         }
     }
 }
@@ -32,5 +39,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+    AppTheme { MultiApp() }
 }

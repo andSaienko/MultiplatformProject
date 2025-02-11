@@ -1,12 +1,18 @@
 package di
 
-import domain.HomeRepository
+import data.repo.ProductsRepositoryImpl
+import domain.ProductsRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
-import presentation.HomeViewModel
+import presentation.auth.AuthViewModel
+import presentation.details.DetailsViewModel
+import presentation.home.HomeViewModel
 
 fun commonModule() = networkModule() + module {
-    singleOf(::HomeRepository)
+    singleOf(::ProductsRepositoryImpl).bind<ProductsRepository>()
     viewModelOf(::HomeViewModel)
+    viewModelOf(::DetailsViewModel)
+    viewModelOf(::AuthViewModel)
 }

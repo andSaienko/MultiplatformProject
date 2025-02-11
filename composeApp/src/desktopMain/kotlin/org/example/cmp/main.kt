@@ -1,9 +1,10 @@
 package org.example.cmp
 
+import AppTheme
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import di.initKoin
-import navigation.App
+import navigation.MultiApp
 
 fun main() = application {
     initKoin()
@@ -11,6 +12,8 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "MultiplatformProject",
     ) {
-        App()
+        AppTheme {
+            MultiApp()
+        }
     }
 }

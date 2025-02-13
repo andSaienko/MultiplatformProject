@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,11 +18,14 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.designsystem.KmpButton
+import core.designsystem.KmpErrorComponent
 import core.designsystem.KmpInputField
-import domain.LoginType
+import domain.model.LoginType
+import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -29,7 +33,6 @@ internal fun AuthScreen(
     viewModel: AuthViewModel = koinViewModel(),
     navigateForward: (LoginType) -> Unit
 ) {
-
     AuthContent(
         viewModel = viewModel,
         navigateForward = navigateForward
@@ -43,6 +46,15 @@ private fun AuthContent(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(state.isError) {
+        delay(2000L)
+        viewModel.hideError()
+    }
+    if (state.isError) {
+        KmpErrorComponent()
+        return
+    }
 
     Scaffold(
         modifier = Modifier.background(Color(202020)),
@@ -76,6 +88,7 @@ private fun AuthContent(
                 onValueChanged = {
                     viewModel.updatePassword(it)
                 },
+                visualTransformation = PasswordVisualTransformation(),
                 placeholderText = "Password",
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Password,
@@ -83,7 +96,11 @@ private fun AuthContent(
                 )
             )
             KmpButton(
-                onClick = { navigateForward.invoke(LoginType.Verified(1)) },
+                onClick = {
+                    viewModel.checkCredentialsAndNavigate {
+                        navigateForward.invoke(LoginType.Verified(1))
+                    }
+                },
                 isEnable = state.isLoginAvailable,
                 text = "Login"
             )
@@ -94,9 +111,3 @@ private fun AuthContent(
         }
     }
 }
-
-//@Preview
-//@Composable
-//private fun AuthPreview() {
-//    AuthContent()
-//}

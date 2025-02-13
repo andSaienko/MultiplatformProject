@@ -1,4 +1,4 @@
-package presentation.loading
+package core.designsystem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

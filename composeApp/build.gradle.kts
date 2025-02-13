@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.google.services)
     kotlin("plugin.serialization") version "2.1.10"
 }
 
@@ -55,6 +56,7 @@ kotlin {
             implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.firebase.auth)
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)

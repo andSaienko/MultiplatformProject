@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import domain.LoginType
+import domain.model.LoginType
 import presentation.auth.AuthScreen
 import presentation.details.DetailsScreen
 import presentation.home.HomeScreen

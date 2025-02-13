@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -21,18 +22,21 @@ fun KmpInputField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChanged: (String) -> Unit,
+    singleLine: Boolean = false,
     placeholderText: String? = null,
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
+    onTrailingIconClick: () -> Unit = { },
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    onTrailingIconClick: () -> Unit = { }
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     TextField(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
-        singleLine = true,
+        singleLine = singleLine,
         value = value,
         onValueChange = onValueChanged,
+        visualTransformation = visualTransformation,
         placeholder = {
             placeholderText?.let {
                 Text(text = it)

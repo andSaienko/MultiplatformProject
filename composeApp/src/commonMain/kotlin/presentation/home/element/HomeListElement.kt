@@ -27,15 +27,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeListElement(
     onClick: () -> Unit,
-    endPadding: Dp = 0.dp,
     productImageUrl: String,
     productTitle: String,
     productPrice: Int
 ) {
-    Box(modifier = Modifier.padding(end = endPadding)) {
+    Box(modifier = Modifier.padding(horizontal = 4.dp)) {
         Card(
             modifier = Modifier
-                .padding(vertical = 8.dp)
+                .padding(vertical = 4.dp)
                 .fillMaxWidth()
                 .clickable {
                     onClick.invoke()

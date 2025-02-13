@@ -1,4 +1,4 @@
-package domain
+package domain.model
 
 sealed interface LoginType {
     data object Unverified : LoginType

@@ -1,4 +1,4 @@
-package domain
+package domain.repo
 
 import data.model.Product
 
